@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VVIP Scrapbook Spesial untuk Aca ❤️</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Quicksand:wght@500;700&display=swap');
+
+        :root {
+            --pink-pastel: #FFC0CB;
+            --pink-soft: #FFB7B2;
+            --cream-bg: #FFF5F5;
+            --sweet-rose: #FF85A1;
+            --text-dark: #5C3D46;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+
+        body {
+            background-color: var(--cream-bg);
+            background-image: 
+                radial-gradient(var(--pink-pastel) 15%, transparent 16%),
+                radial-gradient(var(--pink-pastel) 15%, transparent 16%);
+            background-size: 60px 60px;
+            background-position: 0 0, 30px 30px;
+            font-family: 'Quicksand', sans-serif;
+            color: var(--text-dark);
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Fredoka', sans-serif;
+            color: var(--sweet-rose);
+        }
+
+        /* Floating Hearts Background */
+        .ambient-heart {
+            position: absolute;
+            font-size: 24px;
+            pointer-events: none;
+            z-index: 1;
+            animation: floatUp 6s linear infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Scrapbook Container */
+        .book-container {
+            position: relative;
+            width: 100%;
+            max-width: 650px;
+            height: 500px;
+            perspective: 1500px;
+            z-index: 10;
+            margin-bottom: 20px;
+        }
+
+        .book {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s;
+            transform-style: preserve-3d;
+        }
+
+        /* Pages */
+        .page {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: #fff;
+            box-shadow: 0 15px 35px rgba(255, 133, 161, 0.2);
+            border-radius: 20px;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+            backface-visibility: hidden;
+            transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+            border: 8px double var(--pink-pastel);
+            transform-origin: left center;
+        }
+
+        /* Simple Flip mechanism active page control */
+        .page.hidden {
+            display: none !important;
+        }
+
+        /* Content Styling */
+        .page-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        .page-title {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 0px #FFE5EC;
+        }
+
+        .page-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        /* Interactive Buttons */
+        .nav-buttons {
+            display: flex;
+            gap: 20px;
+            z-index: 100;
+        }
+
+        .btn {
+            background-color: var(--sweet-rose);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1rem;
+            font-family: 'Fredoka', sans-serif;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 133, 161, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: scale(1.08);
+            background-color: #ff6b8b;
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Cute Stickers */
+        .sticker {
+            position: absolute;
+            font-size: 40px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            filter: drop-shadow(3px 3px 0px rgba(0,0,0,0.1));
+            animation: bounce 3s infinite ease-in-out;
+        }
+
+        .sticker:hover {
+            transform: scale(1.3) rotate(15deg);
+        }
+
+        .st-bear { bottom: 20px; left: 25px; font-size: 65px; }
+        .st-cat { top: 15px; right: 25px; font-size: 60px; }
+        .st-flower1 { top: 20px; left: 20px; font-size: 45px; }
+        .st-flower2 { bottom: 25px; right: 25px; font-size: 50px; }
+        .st-lovehand { top: 40%; left: 15px; font-size: 55px; }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+        }
+
+        /* Custom Click Pop Love */
+        .click-love {
+            position: absolute;
+            pointer-events: none;
+            font-size: 35px;
+            animation: explode 0.8s ease-out forwards;
+            z-index: 9999;
+        }
+
+        @keyframes explode {
+            0% { transform: scale(0.3) translate(0, 0); opacity: 1; }
+            100% { transform: scale(1.5) translate(var(--mx), var(--my)); opacity: 0; }
+        }
+
+        /* Photo Simulator Card (Since we cannot use real photo files) */
+        .polaroid {
+            background: white;
+            padding: 15px 15px 40px 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transform: rotate(-3deg);
+            border: 1px solid #ddd;
+            margin: 15px 0;
+            width: 200px;
+            position: relative;
+        }
+
+        .polaroid-img {
+            width: 170px;
+            height: 170px;
+            background-color: var(--pink-pastel);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .polaroid-img::after {
+            content: "💖 ACA & RAFFI 💖";
+            position: absolute;
+            bottom: 10px;
+            font-size: 10px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+
+        /* Interactive pop up cute alert */
+        .bubble-dialog {
+            background: #fff;
+            border-radius: 20px;
+            border: 3px solid var(--pink-pastel);
+            padding: 15px;
+            position: relative;
+            margin-top: 15px;
+            font-size: 0.95rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
+
+        .audio-control {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            background: white;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            font-size: 20px;
+            z-index: 1000;
+        }
+
+        /* Decor ribbon */
+        .ribbon {
+            width: 150px;
+            height: 30px;
+            background: var(--sweet-rose);
+            color: white;
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            transform: rotate(-15deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 0.85rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body onclick="createClickHeart(event)">
+
+    <!-- Ambient Floating Hearts -->
+    <div id="ambient-container"></div>
+
+    <!-- Music (Auto-simulated with cute notification as browser blocks autoplay) -->
+    <div class="audio-control" onclick="toggleCuteMusic()">🎵</div>
+
+    <!-- MAIN SCRAPBOOK -->
+    <div class="book-container">
+        <div class="book" id="myBook">
+            
+            <!-- HALAMAN 1: COVER -->
+            <div class="page" id="page-1">
+                <span class="ribbon">🎀 FOR ACA 🎀</span>
+                <span class="sticker st-bear" onclick="stickerTalk('Haloo Aca sayaaang! 🐻')">🐻</span>
+                <span class="sticker st-flower1" onclick="stickerTalk('Aca cantik kaya bunga! 🌸')">🌸</span>
+                
+                <div class="page-content">
+                    <h1 class="page-title" style="font-size: 2.3rem;">✨ ACA'S SCRAPBOOK ✨</h1>
+                    <p class="page-text" style="font-weight: bold; color: var(--sweet-rose);">
+                        Kado VVIP Virtual Super Premium Khusus Buat Bocil Kelas 11 Kesayangan Kak Raffi!
+                    </p>
+                    <div class="polaroid">
+                        <div class="polaroid-img">👩‍❤️‍👨</div>
+                        <p style="font-family: 'Fredoka', sans-serif; margin-top: 10px; font-size: 0.9rem;">My Favorite Person! 💕</p>
+                    </div>
+                    <div class="bubble-dialog" id="speech-bubble">
+                        👉 <i>Klik stiker beruang / kucingnya untuk denger mereka ngomong!</i>
+                    </div>
+                </div>
+                <p style="font-size: 0.8rem; color: #aaa;">Halaman 1 dari 4</p>
+            </div>
+
+            <!-- HALAMAN 2: SURAT CINTA HUKUM -->
+            <div class="page hidden" id="page-2">
+                <span class="sticker st-cat" onclick="stickerTalk('Meowww! Jangan lupa senyum hari ini pacarnya Kak Raffi! 🐱')">🐱</span>
+                <span class="sticker st-lovehand" onclick="stickerTalk('Jari Love ini buat Aca dari Kak Raffi! 🫶')">🫶</span>
+                
+                <div class="page-content">
+                    <h2 class="page-title">📜 Surat Pembelaan Cinta ⚖️</h2>
+                    <p class="page-text" style="text-align: justify; font-size: 0.95rem;">
+                        "Berdasarkan <b>Pasal 1 Hati Kak Raffi</b>, menyatakan bahwa adek <b>Aca</b> si bocil kelas 11 SMA yang paling lucu sedunia, secara sah dan meyakinkan bersalah karena telah <b>mencuri seluruh perhatian Kak Raffi</b> tanpa izin!"
+                    </p>
+                    <p class="page-text" style="text-align: justify; font-size: 0.95rem;">
+                        Hukumannya? Adek Aca divonis hukuman <i>disayang selamanya oleh Kak Raffi</i> mahasiswa hukum yang bucin ini. Tidak ada upaya banding! 💖
+                    </p>
+                    <div class="bubble-dialog">
+                        ⚖️ <i>"Status Hubungan kita dilindungi oleh undang-undang cinta!"</i>
+                    </div>
+                </div>
+                <p style="font-size: 0.8rem; color: #aaa;">Halaman 2 dari 4</p>
+            </div>
+
+            <!-- HALAMAN 3: GAME INTERAKTIF -->
+            <div class="page hidden" id="page-3">
+                <span class="sticker st-flower2" onclick="stickerTalk('Chuuu~ Sayang Aca banyak-banyak! 💖')">🌻</span>
+                
+                <div class="page-content">
+                    <h2 class="page-title">🧸 Klik Tombol Kebucinan! 🧸</h2>
+                    <p class="page-text">Seberapa sayang Kak Raffi sama Aca? Coba dipencet terus tombol di bawah ini!</p>
+                    
+                    <button class="btn" style="background-color: #ff477e; margin-bottom: 10px;" onclick="tambahBucin()">
+                        Pencet Tombol Sayang Aca!
+                    </button>
+                    
+                    <div style="font-size: 1.2rem; font-weight: bold; margin-top: 10px;">
+                        Skor Sayang: <span id="bucin-score" style="color: var(--sweet-rose); font-size: 1.8rem;">0</span> %
+                    </div>
+                    <p id="bucin-comment" style="font-style: italic; font-size: 0.9rem; margin-top: 5px;">Ayo klik terus sampai meluap!</p>
+                </div>
+                <p style="font-size: 0.8rem; color: #aaa;">Halaman 3 dari 4</p>
+            </div>
+
+            <!-- HALAMAN 4: HARAPAN & DOA -->
+            <div class="page hidden" id="page-4">
+                <span class="sticker st-bear" onclick="stickerTalk('Muachh! Kak Raffi selalu bangga sama Aca! 🐻')">🐻</span>
+                <span class="sticker st-cat" onclick="stickerTalk('Semangat sekolahnya ya bocil gemas! 🐱')">🐱</span>
+                
+                <div class="page-content">
+                    <h2 class="page-title">🎈 Harapan Kak Raffi untuk Aca 🎈</h2>
+                    <p class="page-text">
+                        Selamat berjuang di kelas 11 SMA-nya ya, Ca. Tetap jadi anak baik, pinter, yang super ceria, dan selalu bikin Kakak kangen. 
+                    </p>
+                    <p class="page-text" style="font-weight: bold; font-size: 1.2rem; color: var(--sweet-rose);">
+                        I Love You So Much, Aca Sayang! Forever and Always 🫶✨
+                    </p>
+                    <div style="font-size: 40px; animation: bounce 1.5s infinite;">💌</div>
+                </div>
+                <p style="font-size: 0.8rem; color: #aaa;">Halaman 4 dari 4</p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Navigasi Buku -->
+    <div class="nav-buttons">
+        <button class="btn" onclick="prevPage()">◀ Kembali</button>
+        <button class="btn" onclick="nextPage()">Lanjut Halaman ▶</button>
+    </div>
+
+    <script>
+        // Pages Configuration
+        let currentPage = 1;
+        const totalPages = 4;
+
+        function showPage(pageNum) {
+            for (let i = 1; i <= totalPages; i++) {
+                const page = document.getElementById(`page-${i}`);
+                if (i === pageNum) {
+                    page.classList.remove('hidden');
+                } else {
+                    page.classList.add('hidden');
+                }
+            }
+        }
+
+        function nextPage() {
+            if (currentPage < totalPages) {
+                currentPage++;
+                showPage(currentPage);
+                triggerConfetti();
+            } else {
+                alert("Yaaay! Sudah sampai halaman terakhir. Jangan lupa bilang i love you ke Kak Raffi ya! 🥰");
+            }
+        }
+
+        function prevPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                showPage(currentPage);
+            }
+        }
+
+        // Click Heart Exploder
+        function createClickHeart(e) {
+            // Kita pastikan tidak menembak di tombol agar navigasi tetap nyaman
+            if (e.target.tagName === 'BUTTON') return;
+
+            const emojis = ['💖', '🫶', '❤️', '💕', '🧸', '🌸', '✨'];
+            const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
+            
+            const heart = document.createElement('div');
+            heart.classList.add('click-love');
+            heart.innerText = randomEmoji;
+            heart.style.left = e.clientX - 15 + 'px';
+            heart.style.top = e.clientY - 15 + 'px';
+
+            // Set random explosion path
+            const mx = (Math.random() - 0.5) * 200 + 'px';
+            const my = (Math.random() - 0.5) * 200 - 100 + 'px'; // tends to go upwards
+            heart.style.setProperty('--mx', mx);
+            heart.style.setProperty('--my', my);
+
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 800);
+        }
+
+        // Ambient floating hearts creator
+        function createAmbientHearts() {
+            const container = document.getElementById('ambient-container');
+            const hearts = ['🌸', '✨', '💕', '❤️', '🎈'];
+            
+            setInterval(() => {
+                const h = document.createElement('div');
+                h.classList.add('ambient-heart');
+                h.innerText = hearts[Math.floor(Math.random() * hearts.length)];
+                h.style.left = Math.random() * 100 + 'vw';
+                h.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                h.style.animationDuration = (Math.random() * 3 + 4) + 's';
+                container.appendChild(h);
+                
+                setTimeout(() => {
+                    h.remove();
+                }, 7000);
+            }, 1500);
+        }
+        createAmbientHearts();
+
+        // Sticker dialog interaction
+        function stickerTalk(text) {
+            const bubble = document.getElementById('speech-bubble');
+            if(bubble) {
+                bubble.innerHTML = `💬 <b>Kata stiker:</b> "${text}"`;
+                bubble.style.backgroundColor = '#FFE5EC';
+                setTimeout(() => {
+                    bubble.style.backgroundColor = '#fff';
+                }, 1000);
+            } else {
+                alert(text);
+            }
+        }
+
+        // Game Counter Bucin
+        let score = 0;
+        function tambahBucin() {
+            score += Math.floor(Math.random() * 10) + 15;
+            const scoreEl = document.getElementById('bucin-score');
+            const commentEl = document.getElementById('bucin-comment');
+            
+            scoreEl.innerText = score;
+            
+            if(score > 100 && score < 500) {
+                commentEl.innerText = "Waaaah rasa sayang Kak Raffi sudah melampaui batas atmosfer! 🚀";
+                scoreEl.style.color = "#ff477e";
+            } else if (score >= 500 && score < 1000) {
+                commentEl.innerText = "Rasa sayangnya sudah melanggar hukum gravitasi bumi! 👩‍🚀❤️";
+            } else if (score >= 1000) {
+                commentEl.innerText = "SAH! Cinta Kak Raffi ke Aca berkekuatan hukum tetap & mutlak tidak tertandingi! 🏛️👑";
+            }
+        }
+
+        // Cute sound notification simulation
+        function toggleCuteMusic() {
+            alert("🌸 *Tee-hee!* Bayangkan lagu romantis kesukaan Aca dan Kak Raffi langsung terputar di sini mengiringi scrapbook gemas ini! 🌸");
+        }
+
+        // Mini confetti burst on page change
+        function triggerConfetti() {
+            for (let i = 0; i < 15; i++) {
+                const conf = document.createElement('div');
+                conf.classList.add('click-love');
+                conf.innerText = ['🎉', '✨', '🍬', '⭐'][Math.floor(Math.random() * 4)];
+                conf.style.left = Math.random() * window.innerWidth + 'px';
+                conf.style.top = Math.random() * window.innerHeight + 'px';
+                conf.style.setProperty('--mx', (Math.random() - 0.5) * 50 + 'px');
+                conf.style.setProperty('--my', '-100px');
+                document.body.appendChild(conf);
+                setTimeout(() => conf.remove(), 800);
+            }
+        }
+    </script>
+</body>
+</html>
